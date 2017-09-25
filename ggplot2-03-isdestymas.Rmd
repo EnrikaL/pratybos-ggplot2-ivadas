@@ -67,21 +67,33 @@ Užduotys: estetinis išdėstymas
 ----------------------------------------------------------------------------- 
 
 1. Kur kode klaida? Kodėl taškai ne mėlyni? Ištaisykite.
+Spalva rašoma skliaustuose aes(), todėl taškai ne mėlyni.
 
 ```{r}
 ggplot(data = mpg) + 
-  geom_point(mapping = aes(x = displ, y = hwy, color = "blue"))
+  geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
 ```
 
 2. Kurie lentelės `mpg` kintamieji yra kategoriniai? Kurie – tolydieji? (Užuomina: `?mpg`). Kaip tai pamatyti atspausdinus `mpg`?
 
 ```{r}
+str(mpg)
+
 
 ```
 
 3. Pasirinkite tolydųjį kintamąjį ir atidėkite jo reikšmes šiose skalėse: `color`, `size`, `shape`. 
+Gauname įspėjimą, nes natūralios
+tvarkos neturinį kintamąjį „cyl“
+išdėstyti eilės tvarka turinčioje dydžių
+skalėje – NEKOREKTIŠKA.
 
 ```{r}
+ggplot(mpg, aes(x = displ, y = hwy, color = cyl)) + geom_point()
+
+ggplot(mpg, aes(x = displ, y = hwy, size = cyl)) + geom_point()
+
+ggplot(mpg, aes(x = displ, y = hwy, shape = cyl)) + geom_point()
 
 ```
 
@@ -89,7 +101,11 @@ ggplot(data = mpg) +
 
 
 ```{r}
+ggplot(mpg, aes(x = cty, y = hwy, color = cyl)) + geom_point()
 
+ggplot(mpg, aes(x = cty, y = hwy, size = cyl)) + geom_point()
+
+ggplot(mpg, aes(x = cty, y = hwy, shape = cyl)) + geom_point()
 ```
 ```{r}
 
@@ -99,7 +115,7 @@ ggplot(data = mpg) +
 5. Ką daro estetikos elementas `stroke`? Su kuriomis formomis jis veikia? (Užuomina: naudokite `geom_point`).
 
 ```{r}
-
+ggplot(mpg, aes(x = displ, y = hwy, color = cyl)) + geom_point("stroke")
 ```
 
 
@@ -112,13 +128,13 @@ ggplot(data = mpg) +
 7. Kas nutinka, jei to paties kintamojo reikšmes atidedate keliose skirtingose skalėse (tarkime, `color` ir `shape`)?
 
 ```{r}
-
+ggplot(mpg, aes(x = displ, y = hwy, color = cyl, shape = cyl)) + geom_point()
 ```
 
 8. Kas nutinka, jei su tam tikra skale susiejate ne konkretaus kintamojo pavadinimą (pvz., `aes(colour = displ)`), o kokį nors veiksmą su tuo kintamuoju, tarkime `aes(colour = displ < 5)`?
 
 ```{r}
-
+ggplot(mpg, aes(x = drv, y = hwy, color = displ <5 )) + geom_point()
 ```
 
 9. Nubraižykite grafiką ir jame rankiniu būdu parinkite spakvas naudodami:
@@ -127,6 +143,23 @@ ggplot(data = mpg) +
     * spalvų numerius tarp 1 ir 8, be kabučių.
     
 ```{r}
+ggplot(data = mpg) + 
+    geom_point(mapping = aes(x = displ, y = hwy), color = "red")
 
 ```
     
+
+```{r}
+ggplot(data = mpg) + 
+    geom_point(mapping = aes(x = displ, y = hwy), color = "#00ff00")
+
+
+
+```
+
+```{r}
+ggplot(data = mpg) + 
+    geom_point(mapping = aes(x = displ, y = hwy), color = 6) 
+
+```
+

@@ -64,17 +64,25 @@ Užduotys: facetės
 
 1. Kas nutinka, jei facetes kuriame pagal tolydųjį kintamąjį?
 
+GAunasi daug fascečių. vietol fl - cty. Facetės naudingos dirbant su kategoriniais kintamaisiais.
 ```{r}
-
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_grid(drv ~ cyl)
 ```
 
 2. Ką rodo tušti langeliai įvykdžius funkciją `facet_grid(drv ~ cyl)`? Kaip jie susiję su šiuo grafiku: 
+
+Nėra reikšmių, patenkančių į šį atvejį
+
 ```{r}
 ggplot(data = mpg) + 
      geom_point(mapping = aes(x = drv, y = cyl)) 
 ```
 
 3. Ką daro žemiau pateiktas kodas? Ką reiškia taškas (`.`)?
+
+Taškas parodo, kad bus vienas stulpelis arba viena eilutė. Šiuo atveju bus eilutė.
 
 ```{r}
 ggplot(data = mpg) + 
@@ -91,8 +99,8 @@ ggplot(data = mpg) +
 
 4. Patyrinėkite antrąją grafiko facetę (kodas žemiau).
     a. Kokie privalumai naudoti facetes vs. išdėstymą spalvomis? 
-    b. Kokie trūkumai?
-    c. Kaip balansas tarp privalumų ir trūkumų pakistų, jei turėtumėte žymiai daugiau duomenų?
+    b. Kokie trūkumai? nematomas bendras vaizdas
+    c. Kaip balansas tarp privalumų ir trūkumų pakistų, jei turėtumėte žymiai daugiau duomenų? Jei daug duomenų, facetės suteikia aiškumo.
 
 
 
@@ -105,17 +113,18 @@ ggplot(data = mpg) +
 Spalvomis išdėstykite klasių pavadinimus
 ```{r}
 ggplot(data = mpg) + 
-    geom_point(mapping = aes(x = displ, y = hwy, color =  )) + 
+    geom_point(mapping = aes(x = displ, y = hwy, color = class)) + 
     facet_wrap(~ class, nrow = 2) 
 ```
 
 
 5. Perskaitykite funkcijos aprašymą: `?facet_wrap`.
-    a. Kokią funkciją atlieka `nrow`? 
-    b. Kokią funkciją atlieka `ncol`? 
+    a. Kokią funkciją atlieka `nrow`? eilučių sk.
+    b. Kokią funkciją atlieka `ncol`? stulpelių sk.
     c. Kurios kitos funkcijos kontroliuoja facečių išdėstymą? 
     d. Kodėl funkcija `facet_grid()` neturi parametrų `nrow` ir `ncol`?
 
 
 
 6. Kokiu atveju naudodami `facet_grid()` kintamąjį su didesniu kiekiu skirtingų reikšmių (faktoriaus lygių) turėtumėte atvaizduoti facečių stulpeliuose? Kodėl?
+PAtogiau rašyti eilutėmis, lapas žemyn. STulpeliais plotas yra ribotas, grafikai sumažėja
